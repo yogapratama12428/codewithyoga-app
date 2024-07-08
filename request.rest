@@ -1,0 +1,8 @@
+##POST
+POST http://localhost:3000/api/sensor
+Content-Type: application/json
+
+{
+    "title": "Sensor API",
+    "value": 250
+}
