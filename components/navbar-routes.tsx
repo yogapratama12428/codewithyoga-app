@@ -3,7 +3,7 @@
 // import { UserButton } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { LogIn} from "lucide-react";
+import { LogIn, LogOut} from "lucide-react";
 import Link from "next/link";
 import { SearchInput } from "./search-input";
 import { LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
@@ -19,7 +19,7 @@ export const NavbarRoutes : React.FC<NavbarRoutesProps> = ({user}) => {
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isPlayerPage = pathname?.includes("/chapters");
   const isSearchPage = pathname === "/search";
-  const isTeacher = false;
+  const isTeacher = true;
 
   return (
     <>
@@ -29,29 +29,41 @@ export const NavbarRoutes : React.FC<NavbarRoutesProps> = ({user}) => {
         </div>
       )}
 
-      <div className="flex gap-x-2 ml-auto">
-        {isTeacherPage || isPlayerPage || user ? (
-          <UserNav imgUrl={user.picture}/>
-        ) : isTeacher ? (
-          <Link href="/teacher/courses">
-            <Button size="sm" variant="ghost">
-              Teacher Mode
-            </Button>
-          </Link>
-        ) : (
-          <div className="flex">
-           
-            <Button>
-              <LogIn className="h-4 w-4 mr-2" />
-              <LoginLink>
-                Login
-              </LoginLink>
-            </Button>
-          </div>
-        )}
+      <div className="flex gap-x-2">
+        <div className="flex gap-x-2 ml-auto">
+          {isTeacherPage || isPlayerPage ? (
+            <Link href="/">
+              <Button size="sm" variant="ghost">
+                <LogOut className="h-4 w-4 mr-2" />
+                Exit
+              </Button>
+            </Link>
+          ) : isTeacher ? (
+            <Link href="/teacher/courses">
+              <Button size="sm" variant="ghost">
+                Teacher Mode
+              </Button>
+            </Link>
+          ) : null}
+        </div>
 
-       {/* <UserButton afterSignOutUrl="/" /> */}
+        <div className="flex gap-x-2 ml-auto">
+          {user ? (
+            <UserNav imgUrl={user.picture}/>
+          ): (
+            <div className="flex">
+            
+              <Button>
+                <LogIn className="h-4 w-4 mr-2" />
+                <LoginLink>
+                  Login
+                </LoginLink>
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
+     
     </>
   );
 };
