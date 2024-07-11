@@ -37,6 +37,8 @@ export const CategoryForm = ({
   courseId,
   options,
 }: CategoryFormProps) => {
+
+ 
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
@@ -101,7 +103,7 @@ export const CategoryForm = ({
                 <FormItem>
                   <FormControl>
                     <Combobox  
-                      options={[]} 
+                      options={options} 
                       {...field}          
                     />
                   </FormControl>

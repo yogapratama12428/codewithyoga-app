@@ -12,12 +12,10 @@ export const Navbar = async () => {
 
   console.log(user);
 
-  const userId = false;
-
   return (
-    <div className="p-4 border-b h-full flex justify-between items-center bg-white shadow-sm">
+    <div className="p-4 border-b h-full  justify-between flex items-center bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm">
       {
-        userId ? ( <MobileSidebar /> ) : (<Logo/> ) 
+        user ? ( <MobileSidebar /> ) : (<Logo/>) 
       }
 
       <NavbarRoutes user={user}/>

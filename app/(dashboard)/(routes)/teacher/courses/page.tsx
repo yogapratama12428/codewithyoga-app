@@ -1,47 +1,32 @@
-import { Button } from "@/components/ui/button";
-import { PlusCircle } from "lucide-react";
-import Link from "next/link";
-// import { DataTable } from "./_components/data-table";
-// import { columns } from "./_components/columns";
-// import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/columns";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { db } from "@/app/lib/db";
 // import { db } from "@/lib/db";
 
 const CoursesPage = async () => {
 
-    // const userId = auth();
+    const { getUser } = getKindeServerSession();
 
-    // if (!userId) {
-    //     return redirect("/");
-    // }
+    const user = await getUser();
 
-    // Remove the getToken property from the userId object.
-    // const { getToken, ...userIdWithoutToken } = userId;
+    if (!user) {
+        return redirect("/");
+    }
 
-    // const courses = await db.course.findMany({
-    //     where: {
-    //         // @ts-ignore
-    //         userId: userIdWithoutToken.userId,
-    //     },
-    //     orderBy: {
-    //         createdAt: "desc",
-    //     },
-    // });
+    const courses = await db.course.findMany({
+        where: {
+            userId: user.id
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
 
     return (
         <div className="p-6">
-            {/* <DataTable columns={columns} data={courses} /> */}
-    
-            <div>
-                <Link href="/teacher/create">
-                    <Button>
-                        <PlusCircle className="h-4 w-4 mr-2" />
-                        New course
-                    </Button>
-                </Link>
-            </div>
-
-           
+            <DataTable columns={columns} data={courses} />
         </div>
     );
 };

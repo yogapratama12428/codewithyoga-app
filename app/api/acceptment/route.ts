@@ -1,0 +1,81 @@
+import { db } from "@/app/lib/db";
+import crypto from "crypto";
+import { NextResponse } from "next/server";
+
+const checkSignature = async (data: any) => {
+    const { MIDTRANS_SERVERKEY_DEV } = process.env;
+  
+    const hash = crypto
+      .createHash("sha512")
+      .update(
+        data.order_id +
+          data.status_code +
+          data.gross_amount +
+          MIDTRANS_SERVERKEY_DEV
+      )
+      .digest("hex");
+  
+    if (data.signature_key !== hash) {
+      return {
+        status: "error",
+        message: "Invalid Signature Key",
+      };
+    }
+  };
+
+  const handleAddCourseToUser = async (order_id: any) => {
+
+    //check duplicate
+ 
+    const AddUserToCourse = await db.purchase.create({
+        data: {
+          userId: order_id.userId,
+          courseId: order_id.courseId,
+        },
+      });
+      console.log(AddUserToCourse);
+      
+  
+    return console.log("Already Exist:", AddUserToCourse);
+  };
+  
+
+export async function POST (req: Request) {
+    const data = await req.json();
+
+    console.log(data);
+  
+    await checkSignature(data);
+  
+    let orderId = data.order_id;
+    let transactionStatus = data.transaction_status;
+    let fraudStatus = data.fraud_status;
+  
+    if (transactionStatus == "capture") {
+      if (fraudStatus == "accept") {
+        // TODO set transaction status on your database to 'success'
+        // and response with 200 OK
+        await handleAddCourseToUser(orderId);
+      }
+    } else if (transactionStatus == "settlement") {
+      // TODO set transaction status on your database to 'success'
+      // and response with 200 OK
+      await handleAddCourseToUser(orderId);
+    } else if (
+      transactionStatus == "cancel" ||
+      transactionStatus == "deny" ||
+      transactionStatus == "expire"
+    ) {
+      // TODO set transaction status on your database to 'failure'
+      // and response with 200 OK
+    } else if (transactionStatus == "pending") {
+      // TODO set transaction status on your database to 'pending' / waiting payment
+      // and response with 200 OK
+    }    
+    
+    return NextResponse.json({
+        status: "Success",
+        message: "OK",
+    })
+    
+}
