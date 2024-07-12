@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "@/app/lib/db";
 import Midtrans from "midtrans-client";
+import { nanoid } from 'nanoid';
 
 export async function POST(
   req: Request,
@@ -13,7 +14,7 @@ export async function POST(
 ) {
   try {
 
-    const { price, courseId} = await req.json();
+    const { price, courseId, given_name, email, course_title} = await req.json();
 
     const { getUser } = getKindeServerSession();
 
@@ -52,21 +53,50 @@ export async function POST(
       serverKey: process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY,
     })
 
+    const orderId = `codewithyoga-${nanoid()}`;
+
     const payload = {
       transaction_details: {
-        order_id: courseId,
+        order_id: orderId,
         gross_amount: price
       },
-      credit_card: {
-        secure: true,
-      },
-    };
+      item_details:[{
+        id: courseId,
+        price: price,
+        quantity: 1,
+        name: `Course Online at CodewithYoga - ${course_title}`,
+        category: "Pelajaran"
+      }],
+      customer_details: {
+        first_name: given_name,
+        email: email
+      }
+    }
 
     const snapTransaction = await snap.createTransaction(payload);
 
     console.log(snapTransaction)
 
-    return NextResponse.json({snapTransaction});
+    const order = await db.order.create({
+      data: {
+        userId: user.id,
+        courseId: courseId,
+        orderId: orderId
+      }
+    })
+
+    console.log('order from checkout:', order)
+
+    const response = {
+      status: 'success',
+      data: {
+        snap_token : snapTransaction.token,
+        snap_redirect_url : snapTransaction.redirect_url
+      }
+    }
+
+    return NextResponse.json(response);
+
   } catch (error) {
     console.log("[COURSE_ID_CHECKOUT]", error);
     return new NextResponse("Internal Error", { status: 500 })

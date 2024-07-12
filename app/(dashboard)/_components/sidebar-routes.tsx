@@ -6,14 +6,14 @@ import { SidebarItem } from "./sidebar-item";
 
 const guestRoutes = [
     {
+      icon: Compass,
+      label: "Browse",
+      href: "/",
+    },
+    {
       icon: Layout,
       label: "Dashboard",
       href: "/dashboard",
-    },
-    {
-      icon: Compass,
-      label: "Browse",
-      href: "/search",
     },
   ];
   

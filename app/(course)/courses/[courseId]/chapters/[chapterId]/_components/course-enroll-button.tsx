@@ -6,22 +6,31 @@ import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
+import useSnap from "@/hooks/use-snap";
 
 interface CourseEnrollButtonProps {
   price: number;
   courseId: string;
+  given_name: string | null;
+  email: string | null;
+  course_title: string;
 }
 
 export const CourseEnrollButton = ({
   price,
-  courseId
+  courseId,
+  given_name,
+  email,
+  course_title,
 }: CourseEnrollButtonProps) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
   const payload = {
-    price, courseId
+    price, courseId, given_name, email, course_title
   }
+
+  const snapEmbed = useSnap()
 
   const onClick = async () => {
     try {
@@ -30,7 +39,11 @@ export const CourseEnrollButton = ({
       const response = await axios.post(`/api/courses/${courseId}/checkout`, payload)
       console.log(response.data)
 
-      window.snap.pay(response.data.snapTransaction.token)
+      if (response && response.data.status === 'success') {
+        snapEmbed
+        // snapEmbed(response.data.data.snap_token, 'snap-container')
+        window.snap.pay(response.data.data.snap_token)
+      }
 
     } catch {
       toast.error("Something went wrong");
@@ -39,23 +52,7 @@ export const CourseEnrollButton = ({
     }
   }
 
-  useEffect(()=>{
-    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js"
-    const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY
-
-    const script = document.createElement('script')
-    script.src = snapScript
-    script.setAttribute('data-client-key', clientKey!)
-    script.async = true;
-
-    document.body.appendChild(script)
-
-    return () => {
-      document.body.removeChild(script)
-    }
-
-
-  },[])
+ 
 
   return (
     <Button

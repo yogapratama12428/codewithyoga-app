@@ -18,7 +18,7 @@ export const NavbarRoutes : React.FC<NavbarRoutesProps> = ({user}) => {
   const pathname = usePathname();
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isPlayerPage = pathname?.includes("/chapters");
-  const isSearchPage = pathname === "/search";
+  const isSearchPage = pathname === "/";
   const isTeacher = true;
 
   return (

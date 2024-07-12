@@ -8,8 +8,6 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getChapter } from "@/actions/get-chapter";
 import { VideoPlayer } from "./_components/video-player";
 import { CourseProgressButton } from "./_components/course-progress-button";
-import { useEffect } from "react";
-
 
 const ChapterIdPage = async ({
   params
@@ -22,7 +20,7 @@ const ChapterIdPage = async ({
   const user = await getUser();
 
   if (!user) {
-    return redirect("/");
+    return redirect("/search");
   } 
 
   const {
@@ -42,10 +40,8 @@ const ChapterIdPage = async ({
     return redirect("/")
   }
 
-
   const isLocked = !chapter.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
-
  
   return ( 
     <div>
@@ -89,8 +85,10 @@ const ChapterIdPage = async ({
               <CourseEnrollButton
                 courseId={params.courseId}
                 price={course.price!}
+                given_name={user.given_name!}
+                email={user.email!}
+                course_title={course.title}
               />
-
             )}
           </div>
           <Separator />

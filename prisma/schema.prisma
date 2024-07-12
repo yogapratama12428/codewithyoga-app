@@ -41,6 +41,7 @@ model Course {
   chapters    Chapter[]
   attachments Attachment[]
   purchases   Purchase[]
+  orders      Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -100,6 +101,21 @@ model Purchase {
   updatedAt DateTime @updatedAt()
 
   @@unique([userId, courseId])
+  @@index([courseId])
+}
+
+model Order {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String
+  orderId String
+
+  courseId String @db.ObjectId
+  courses  Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@unique([userId, courseId, orderId])
   @@index([courseId])
 }
 

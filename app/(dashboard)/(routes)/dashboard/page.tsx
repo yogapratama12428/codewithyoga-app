@@ -1,13 +1,11 @@
 // import auth session from Kinde
 import { redirect } from "next/navigation";
 import { CheckCircle, Clock, InfoIcon } from "lucide-react";
-
-// import { getDashboardCourses } from "@/actions/get-dashboard-courses";
-// import { CoursesList } from "@/components/courses-list";
-
 import { InfoCard } from "./_components/info-card";
 import { BannerCard } from "./_components/banner-card";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { CoursesList } from "@/components/course-list";
+import { getDashboardCourses } from "@/actions/get-dashboard-corses";
 
 export default async function Dashboard() {
 
@@ -15,13 +13,13 @@ export default async function Dashboard() {
   const user = await getUser()
 
   if (!user) {
-    return redirect("/");
+    return redirect("/search");
   }
 
-  // const {
-  //   completedCourses,
-  //   coursesInProgress
-  // } = await getDashboardCourses(userId);
+  const {
+    completedCourses,
+    coursesInProgress
+  } = await getDashboardCourses(user.id);
 
   return (
     <div className="p-6 space-y-4">
@@ -51,9 +49,9 @@ export default async function Dashboard() {
               variant="success"
             />
           </div>
-      {/* <CoursesList
-        items={[...coursesInProgress, ...completedCourses]}
-      /> */}
+          <CoursesList
+            items={[...coursesInProgress, ...completedCourses]}
+          />
           </>
         )
       }

@@ -8,11 +8,11 @@ const DashboardLayout = ({
   }) => {
     return ( 
       <div className="h-full dark:bg-gray-900">
-        <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50 dark:bg-gray-900">
+        <div className="h-[80px] md:pl-0 fixed inset-y-0 w-full z-50 dark:bg-gray-900">
           <Navbar />
         </div>
 
-        <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50 dark:bg-gray-900">
+        <div className="hidden mt-20 md:flex h-full w-56 flex-col fixed inset-y-0 z-50 dark:bg-gray-900">
           <Sidebar />
         </div>
       {/* pt or pull top pushes the content down accounting for the height of the navbar  
