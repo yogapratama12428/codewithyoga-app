@@ -23,11 +23,8 @@ const SearchPage = async ({
 }: SearchPageProps) => {
 
   const { getUser } = getKindeServerSession();
+  
   const user = await getUser();
-
-  // if (!user) {
-  //   return redirect("/");
-  // } 
   
   const categories = await db.category.findMany({
     orderBy: {
