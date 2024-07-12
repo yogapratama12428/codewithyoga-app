@@ -50,7 +50,7 @@ export async function POST(
 
     let snap = new Midtrans.Snap({
       isProduction: false,
-      serverKey: process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY,
+      serverKey: process.env.MIDTRANS_SERVER_KEY,
     })
 
     const orderId = `codewithyoga-${nanoid()}`;

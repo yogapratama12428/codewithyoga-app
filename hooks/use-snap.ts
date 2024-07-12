@@ -5,7 +5,7 @@ const useSnap = () => {
 
     useEffect(()=>{
         const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js"
-        const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY
+        const clientKey = process.env.MIDTRANS_CLIENT_KEY
     
         const script = document.createElement('script')
         script.src = snapScript
