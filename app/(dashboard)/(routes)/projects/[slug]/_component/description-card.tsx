@@ -1,49 +1,39 @@
-import Image from "next/image";
-import Link from "next/link";
-import { BookOpen } from "lucide-react";
-
+import { CourseProgress } from "@/components/course-progress";
 import { IconBadge } from "@/components/icon-badge";
 import { formatPrice } from "@/lib/format";
-import { CourseProgress } from "@/components/course-progress";
+import { BookOpen } from "lucide-react";
+import Image from "next/image"
+
 
 interface CourseCardProps {
   id: string;
-  slug: string;
   title: string;
-  imageUrl: string;
   chaptersLength: number;
   price: number;
   progress: number | null;
   category: string;
+  description: string  
 };
 
-export const CourseCard = ({
+export const DescriptionForm = ({
   id,
   title,
-  imageUrl,
   chaptersLength,
   price,
   progress,
   category,
-  slug,
-}: CourseCardProps) => {
+  description,
+}: CourseCardProps ) => {
   return (
-    // <Link href={`/courses/${id}`}>
-     <Link href={`/projects/${slug}`}> 
-      <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
-        <div className="relative w-full aspect-video rounded-md overflow-hidden">
-          <Image
-            fill
-            className="object-cover"
-            alt={title}
-            src={imageUrl}
-          />
-        </div>
-        <div className="flex flex-col pt-2">
-          <div className="text-lg md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
+     <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
+        <div className="flex flex-col pt-2 gap-2">
+          <div className="text-2xl md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
             {title}
           </div>
-          <p className="text-xs text-muted-foreground">
+           <div className="text-slate-500 text-xs md:text-sm font-medium group-hover:text-sky-700 transition ">
+            {description}
+          </div>
+          <p className="text-xs text-black text-muted-foreground border border-slate-600 rounded-sm w-20 text-center">
             {category}
           </p>
           <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
@@ -67,6 +57,6 @@ export const CourseCard = ({
           )}
         </div>
       </div>
-    </Link>
   )
 }
+

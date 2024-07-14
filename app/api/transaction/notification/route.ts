@@ -22,22 +22,6 @@ const checkSignature = async (data: any) => {
       };
     }
   };
-
-  const handleAddCourseToUser = async (order_id: any) => {
-
-    //check duplicate
- 
-    const AddUserToCourse = await db.purchase.create({
-        data: {
-          userId: order_id.userId,
-          courseId: order_id.courseId,
-        },
-      });
-      console.log(AddUserToCourse);
-      
-  
-    return console.log("Already Exist:", AddUserToCourse);
-  };
   
 
 export async function POST (req: Request) {
@@ -56,7 +40,7 @@ export async function POST (req: Request) {
         // TODO set transaction status on your database to 'success'
         // and response with 200 OK
         // await handleAddCourseToUser(orderId);
-        const order = await db.order.findFirst({
+        const order = await db.order.findUnique({
           where: {
             orderId: data?.orderId,
           },

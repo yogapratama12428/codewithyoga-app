@@ -2,7 +2,6 @@ import { Category, Course } from "@prisma/client";
 import { getProgress } from "./get-progress";
 import { db } from "@/app/lib/db";
 
-
 type CourseWithProgressWithCategory = Course & {
   category: Category | null;
   chapters: { id: string }[];
@@ -10,7 +9,7 @@ type CourseWithProgressWithCategory = Course & {
 };
 
 type GetCourses = {
-  userId: string | 'kosong';
+  userId: string;
   title?: string;
   categoryId?: string;
 };
@@ -49,6 +48,9 @@ export const getCourses = async ({
         createdAt: "desc",
       }
     });
+
+
+    console.log('course:', courses);
 
     const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
       courses.map(async course => {

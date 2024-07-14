@@ -28,6 +28,7 @@ model User {
 model Course {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   userId      String
+  slug        String  @unique
   title       String  @db.String
   description String? @db.String
   imageUrl    String? @db.String
@@ -45,7 +46,7 @@ model Course {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  
   @@index([categoryId])
 }
 
@@ -107,7 +108,7 @@ model Purchase {
 model Order {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   userId  String
-  orderId String
+  orderId String @unique
 
   courseId String @db.ObjectId
   courses  Course @relation(fields: [courseId], references: [id], onDelete: Cascade)

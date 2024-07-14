@@ -13,7 +13,7 @@ export default async function Dashboard() {
   const user = await getUser()
 
   if (!user) {
-    return redirect("/search");
+    return redirect("/");
   }
 
   const {

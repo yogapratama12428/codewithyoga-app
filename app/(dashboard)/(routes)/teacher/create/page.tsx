@@ -29,7 +29,11 @@ import { useRouter } from "next/navigation";
 const formSchema = z.object({
     title: z.string().min(5, {
         message: "Title should be at least 5 characters long."
-    })
+    }),
+    slug: z.string().min(5, {
+        message: "Title should be at least 5 characters long."
+    }),
+
 })
 
 
@@ -70,7 +74,7 @@ const CreatePage = () => {
                 <Form { ...form } >
                     <form 
                         onSubmit={ form.handleSubmit(onSubmit) }
-                        className="space-y-8 mt-8"
+                        className="space-y-4 mt-8"
                     >
                         <FormField 
                             control={form.control}
@@ -84,6 +88,22 @@ const CreatePage = () => {
                                         <Input
                                             disabled={isSubmitting}
                                             placeholder="e.g. 'Advanced web development'"
+                                            { ...field } // spread the field props
+                                        />
+                                    </FormControl>
+                                </FormItem>
+                            )
+                            }
+                        />
+                         <FormField 
+                            control={form.control}
+                            name="slug"
+                            render={({field }) => (
+                                <FormItem>
+                                    <FormControl>
+                                        <Input
+                                            disabled={isSubmitting}
+                                            placeholder="e.g. 'build-app-iot-paltform'"
                                             { ...field } // spread the field props
                                         />
                                     </FormControl>

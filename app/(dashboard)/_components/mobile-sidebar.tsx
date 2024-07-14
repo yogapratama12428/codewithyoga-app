@@ -14,7 +14,7 @@ import { Logo } from "./logo";
 export const MobileSidebar = () => {
   return (
     <div>
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         <Sheet>
           <SheetTrigger className="pr-4 hover:opacity-75 transition">
             <Menu />

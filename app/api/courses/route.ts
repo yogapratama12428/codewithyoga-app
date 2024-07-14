@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const { getUser } = getKindeServerSession();
     
     const user =  await getUser();
-    const { title } = await request.json();
+    const { title, slug } = await request.json();
 
     if(!user) return new NextResponse("Unauthorize", { status : 401} )
 
@@ -16,6 +16,7 @@ export async function POST(request: Request) {
             data: {
                 title,
                 userId: user.id,
+                slug: slug
             }
         })
 

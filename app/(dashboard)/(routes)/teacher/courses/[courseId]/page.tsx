@@ -14,6 +14,7 @@ import { CategoryForm } from './_components/category-form';
 import { ChaptersForm } from './_components/chapters-form';
 import { PriceForm } from './_components/price-form';
 import { AttachmentForm } from './_components/attachment-form';
+import { SlugForm } from './_components/slug-form';
 
 const Coursepage = async ({
     params
@@ -61,6 +62,7 @@ const Coursepage = async ({
         course.description,
         course.imageUrl,
         course.price,
+        course.slug,
         course.categoryId,
         course.chapters.some(chapter => chapter.isPublished),
     ];
@@ -106,6 +108,10 @@ const Coursepage = async ({
               </h2>
             </div>
             <TitleForm
+              initialData={course}
+              courseId={course.id}
+            />
+             <SlugForm
               initialData={course}
               courseId={course.id}
             />

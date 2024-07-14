@@ -14,10 +14,8 @@ export const Navbar = async () => {
 
   return (
     <div className="p-4 border-b h-full  justify-between flex items-center bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm">
-      {
-        user ? ( <MobileSidebar /> ) : (<Logo/>) 
-      }
-
+      <MobileSidebar /> 
+    
       <NavbarRoutes user={user}/>
     </div>
   )

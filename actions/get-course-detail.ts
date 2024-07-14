@@ -1,21 +1,42 @@
 import { db } from "@/app/lib/db"
+import { getProgress } from "./get-progress"
 
 type getCourseDetails = {
-    title: string
+    slug: string,
+    userId: string | any,
 }
 
+
 export const getCourseDetails = async ({
-    title
+    slug,
+    userId,
 }: getCourseDetails) => {
     try {
-        const course = await db.course.findFirst({
+        const course = await db.course.findUnique({
             where: {
-                title: title
+                slug
             },
+            include: {
+                chapters: {
+                    where: {
+                        isPublished: true
+                    }
+                },
+                category: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
         })
 
-        return course
-        
+        const progressPercentage = await getProgress(userId, course?.id)
+
+        return {
+            ...course,
+            progress:progressPercentage,
+        }
+
     } catch (error) {
         console.log("[GET_COURSES_DETAILS]", error);
     }

@@ -1,7 +1,3 @@
-
-import { redirect } from "next/navigation";
-
-
 import { SearchInput } from "@/components/search-input";
 import { getCourses } from "@/actions/get-course";
 

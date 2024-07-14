@@ -64,7 +64,7 @@ export async function POST(
         id: courseId,
         price: price,
         quantity: 1,
-        name: `Course Online at CodewithYoga - ${course_title}`,
+        name: `CodewithYoga - ${course_title}`,
         category: "Pelajaran"
       }],
       customer_details: {
