@@ -69,15 +69,15 @@ const ProjectPage =  async ({
             user={user?.id ?? ''}
           />
 
-          {/* <ClassroomCard 
-            alt="telegram"
-            src="/googleclassroom.svg"
+          <DialogComponent  
+            alt="github"
+            src="/github.svg"
             width={30}
             height={30}
-            title="Go To Dashboard"
-            courseId={course.id} 
+            title="Sourcecode"
+            price={course?.price}
             user={user?.id ?? ''}
-          /> */}
+          />
 
           <CourseBuyButton 
             price={course.price} 
