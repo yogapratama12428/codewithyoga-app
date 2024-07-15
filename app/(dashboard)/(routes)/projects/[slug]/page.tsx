@@ -2,12 +2,9 @@ import { getCourseDetails } from "@/actions/get-course-detail"
 import ImageBanner from "./_component/image-banner";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { DescriptionForm } from "./_component/description-card";
-import { FileCard } from "./_component/file-component";
 import { CourseBuyButton } from "./_component/button-component";
-import { GrupCard } from "./_component/grup-card";
 import { DialogComponent } from "./_component/dialog-component";
-
-
+import { ClassroomCard } from "./_component/classroom-card";
 
 interface CourseCard {
   id: string;
@@ -19,8 +16,8 @@ interface CourseCard {
   description: string  
   imageUrl: string;
   chapters: string;
-}
 
+}
 
 const ProjectPage =  async ({
   params
@@ -61,15 +58,6 @@ const ProjectPage =  async ({
         </div>
 
         <div className="flex flex-col gap-2 mx-2">
-          
-
-          <DialogComponent 
-            alt="github"
-            src="/github.svg"
-            width={30}
-            height={30}
-            title="Sourcecode"
-          />
 
           <DialogComponent 
             alt="telegram"
@@ -77,9 +65,19 @@ const ProjectPage =  async ({
             width={30}
             height={30}
             title="Join Grup"
+            price={course?.price}
+            user={user?.id ?? ''}
           />
-            
-          
+
+          <ClassroomCard 
+            alt="telegram"
+            src="/googleclassroom.svg"
+            width={30}
+            height={30}
+            title="Go To Dashboard"
+            courseId={course.id} 
+          />
+
           <CourseBuyButton 
             price={course.price} 
             courseId={course.id} 
@@ -87,6 +85,7 @@ const ProjectPage =  async ({
             given_name={user?.given_name}
             email={user?.email}
         />
+
         </div>
 
        

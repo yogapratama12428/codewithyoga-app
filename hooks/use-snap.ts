@@ -24,7 +24,7 @@ const useSnap = () => {
     //     if(window.snap) {
     //         window.snap.embed(snap_token, {
     //             embedId,
-    //             onSuccess: function (result: any) {
+    //               onSuccess: function (result: any) {
     //                 /* You may add your own implementation here */
     //                 alert("payment success!"); console.log(result);
     //               },

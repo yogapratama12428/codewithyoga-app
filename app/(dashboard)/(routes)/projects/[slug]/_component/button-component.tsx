@@ -1,11 +1,12 @@
 "use client";
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 import { formatPrice } from "@/lib/format";
 import useSnap from "@/hooks/use-snap";
+import { useRouter } from "next/navigation";
 
 interface CourseBuyButtonProps {
   price: number;
@@ -22,6 +23,8 @@ export const CourseBuyButton = ({
   email,
   course_title,
 }: CourseBuyButtonProps) => {
+
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,7 +44,27 @@ export const CourseBuyButton = ({
       if (response && response.data.status === 'success') {
         snapEmbed
         // snapEmbed(response.data.data.snap_token, 'snap-container')
-        window.snap.pay(response.data.data.snap_token)
+        window.snap.pay(response.data.data.snap_token, {
+          onSuccess: function (result: any) {
+            /* You may add your own implementation here */
+            console.log("success");
+            router.push(`/course/${courseId}`)
+            
+          },
+          onPending: function (result: any) {
+            /* You may add your own implementation here */
+            console.log("wating your payment!");
+          },
+          onError: function (result: any) {
+            /* You may add your own implementation here */
+            console.log("payment failed!");
+          },
+          onClose: function () {
+            /* You may add your own implementation here */
+            console.log('you closed the popup without finishing the payment');
+            router.push('/thanks')
+        }
+        })
       }
 
     } catch {

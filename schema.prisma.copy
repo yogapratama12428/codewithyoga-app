@@ -28,7 +28,6 @@ model User {
 model Course {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   userId      String
-  joingrup    String?
   slug        String  @unique
   title       String  @db.String
   description String? @db.String
@@ -47,7 +46,7 @@ model Course {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  
   @@index([categoryId])
 }
 
