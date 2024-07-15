@@ -24,22 +24,21 @@ export const ClassroomCard = ({alt, src, width, height, title, courseId, user} :
   const router = useRouter();
 
   return (
-    // <Link href={`/courses/${courseId}`}>
-        <Button 
-          
-          disabled={ !user ? true : false} 
-          className='flex flex-col gap-2 w-full h-20 text-white '
-          onClick={ 
-            () => {
-              if (user) {
-                router.push(`/courses/${courseId}`)
-              }
+    <div className=''>
+      <Button 
+        disabled={ !user ? true : false} 
+        className='flex flex-col gap-2 w-full h-20 text-white '
+        onClick={ 
+          () => {
+            if (user) {
+              router.push(`/courses/${courseId}`)
             }
           }
-        >
-         <Presentation className='w-6 h-6' />
-            Class Room
-        </Button>
-    // </Link>
+        }
+      >
+        <Presentation className='w-6 h-6' />
+          Class Room
+      </Button>
+    </div>   
   )
 }
