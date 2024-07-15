@@ -32,9 +32,18 @@ export const getCourseDetails = async ({
 
         const progressPercentage = await getProgress(userId, course?.id)
 
+        const purchase = await db.purchase.findFirst({
+            where: {
+                userId: userId,
+                courseId: (course?.id as string),
+                
+            }
+          });
+
         return {
             ...course,
             progress:progressPercentage,
+            purchase
         }
 
     } catch (error) {

@@ -31,12 +31,9 @@ export async function POST(
       }
     });
 
-    const purchase = await db.purchase.findUnique({
+    const purchase = await db.purchase.findFirst({
       where: {
-        userId_courseId: {
-          userId: user.id,
           courseId: params.courseId
-        }
       }
     });
 

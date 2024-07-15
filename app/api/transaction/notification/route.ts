@@ -40,9 +40,9 @@ export async function POST (req: Request) {
         // TODO set transaction status on your database to 'success'
         // and response with 200 OK
         // await handleAddCourseToUser(orderId);
-        const order = await db.order.findUnique({
+        const order = await db.order.findFirst({
           where: {
-            orderId: data?.orderId,
+            orderId: orderId,
           },
         })
     
@@ -77,7 +77,7 @@ export async function POST (req: Request) {
         // await handleAddCourseToUser(orderId);
         const order = await db.order.findFirst({
           where: {
-            orderId: data?.orderId,
+            orderId: orderId
           },
         })
     

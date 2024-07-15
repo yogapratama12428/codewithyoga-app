@@ -7,6 +7,10 @@ import toast from "react-hot-toast";
 import { formatPrice } from "@/lib/format";
 import useSnap from "@/hooks/use-snap";
 import { useRouter } from "next/navigation";
+import { LogIn } from "lucide-react";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs";
+import { Button } from "@/components/ui/button";
+import { ClassroomCard } from "./classroom-card";
 
 interface CourseBuyButtonProps {
   price: number;
@@ -14,6 +18,8 @@ interface CourseBuyButtonProps {
   given_name: string | null | undefined;
   email: string | null | undefined;
   course_title: string;
+  purchase: string
+  user:string
 }
 
 export const CourseBuyButton = ({
@@ -22,6 +28,8 @@ export const CourseBuyButton = ({
   given_name,
   email,
   course_title,
+  purchase,
+  user
 }: CourseBuyButtonProps) => {
 
   const router = useRouter();
@@ -48,7 +56,7 @@ export const CourseBuyButton = ({
           onSuccess: function (result: any) {
             /* You may add your own implementation here */
             console.log("success");
-            router.push(`/course/${courseId}`)
+            // router.push(`/course/${courseId}`)
             
           },
           onPending: function (result: any) {
@@ -78,18 +86,49 @@ export const CourseBuyButton = ({
 
   return (
      <div 
-      className="group hover:shadow-sm  items-center  transition overflow-hidden border rounded-lg h-20 bg-slate-800 text-white text-bold"
+      className="group hover:shadow-sm items-center  overflow-hidden border rounded-lg h-20 bg-slate-800 text-white text-bold"
       
      >
-        <div className='flex flex-col justify-items-center '>
-          <button
-           onClick={onClick}
-            disabled={isLoading}
-            className="md:w-auto w-full h-20 items-center"
-          >
-            Enroll for {formatPrice(price)}
-          </button>
-        </div>
+        {
+          email ? (
+            !purchase ? (
+              <div className='flex flex-col justify-items-center '>
+                <button
+                  onClick={onClick}
+                  disabled={isLoading}
+                  className="md:w-auto w-full h-20 items-center"
+                >
+                Enroll for {formatPrice(price)}
+              </button>
+              </div>
+            ) : (
+              <div className='flex flex-col justify-items-center '>
+                <ClassroomCard
+                  alt="telegram"
+                  src="/googleclassroom.svg"
+                  width={30}
+                  height={30}
+                  title="Go To Dashboard"
+                  courseId={courseId} 
+                  user={user}
+                />
+              </div>
+              
+            )
+            
+          ) : (
+            <div className='flex flex-col justify-items-center h-full'>
+              <Button className="h-20">
+              
+                <LoginLink>
+                  enroll for {formatPrice(price)}
+                </LoginLink>
+              </Button>
+              
+          </div>
+          )
+        }
+       
       </div>
    
   )
