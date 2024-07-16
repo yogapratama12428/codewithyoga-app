@@ -8,9 +8,8 @@ export const Logo = () => {
             height={200}
             width={200}
             alt="logo"
-            src="/logo.svg"
+            src="/Logo.svg"
         />
         </Link>
-        
     )
 }
