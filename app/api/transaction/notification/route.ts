@@ -36,37 +36,7 @@ export async function POST (req: Request) {
     let fraudStatus = data.fraud_status;
 
     if (transactionStatus == "capture") {
-      if (fraudStatus == "accept") {
-        // TODO set transaction status on your database to 'success'
-        // and response with 200 OK
-        // await handleAddCourseToUser(orderId);
-        const order = await db.order.findFirst({
-          where: {
-            orderId: orderId,
-          },
-        })
-    
-        console.log('order from notification:', order)
-
-        if(!order) {
-          console.log('order not found')
-          return NextResponse.json({
-            status: "error",
-            message: "Order not found",
-          })  // or throw an error if you want to stop the execution here
-        }
-
-        const addUsertoCourse = await db.purchase.create({
-          data: {
-            userId: order?.userId,
-            courseId: order?.courseId,
-          }
-        })  
-
-        console.log('purchase from notification:', addUsertoCourse)
-
-        console.log("acceptment")
-      }
+      console.log("capt")
     } else if (transactionStatus == "settlement") {
       // TODO set transaction status on your database to 'success'
       // and response with 200 OK
@@ -100,7 +70,6 @@ export async function POST (req: Request) {
 
         console.log('purchase from notification:', addUsertoCourse)
 
-        console.log("acceptment")
       }
       console.log("settlement")
     } else if (

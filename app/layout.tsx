@@ -8,7 +8,20 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "codewithyoga",
-  description: "monitoring base level",
+  description: "codewithyoga menyediakan kelas online bersertifikat dan komunitas untuk belajar skills IoT Developer dan coding yang dibimbing oleh mentor profesional, Bergabunglah bersama kami!",
+  applicationName: 'Online Course',
+  referrer: 'origin-when-cross-origin',
+  authors: [ { name: 'Yoga Pratama Pangestu' }],
+  creator: 'Yoga Pratama Pangestu',
+  publisher: 'Codewithyoga',
+  openGraph: {
+    title: 'Online Course',
+    description: 'codewithyoga menyediakan kelas online bersertifikat dan komunitas untuk belajar skills IoT Developer dan coding yang dibimbing oleh mentor profesional, Bergabunglah bersama kami!',
+    url: 'https://codewithyoga.com',
+    siteName: 'codewithyoga.com',
+    locale: 'id_ID',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

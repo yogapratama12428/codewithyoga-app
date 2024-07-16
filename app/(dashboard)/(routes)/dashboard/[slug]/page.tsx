@@ -1,11 +1,13 @@
 import { getCourseDetails } from "@/actions/get-course-detail"
-import ImageBanner from "./_component/image-banner";
+
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { DescriptionForm } from "./_component/description-card";
-import { CourseBuyButton } from "./_component/button-component";
-import { DialogComponent } from "./_component/dialog-component";
+
 import { Metadata, ResolvingMetadata } from "next";
 import { getProject } from "@/actions/get-project";
+import ImageBanner from "../../projects/[slug]/_component/image-banner";
+import { DescriptionForm } from "../../projects/[slug]/_component/description-card";
+import { DialogComponent } from "../../projects/[slug]/_component/dialog-component";
+import { CourseBuyButton } from "../../projects/[slug]/_component/button-component";
 
 interface CourseCard {
   id: string;

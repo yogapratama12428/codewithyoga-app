@@ -8,6 +8,7 @@ interface GetChapterProps {
   chapterId: string;
 };
 
+
 export const getChapter = async ({
   userId,
   courseId,
@@ -58,11 +59,6 @@ export const getChapter = async ({
     }
 
     if (chapter.isFree || purchase) {
-    //   muxData = await db.muxData.findUnique({
-    //     where: {
-    //       chapterId: chapterId,
-    //     }
-    //   });
 
       nextChapter = await db.chapter.findFirst({
         where: {

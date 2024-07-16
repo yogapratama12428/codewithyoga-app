@@ -40,12 +40,12 @@ export default async function Dashboard() {
             <InfoCard
               icon={Clock}
               label="In Progress"
-              numberOfItems={2}
+              numberOfItems={coursesInProgress.length}
             />
             <InfoCard
               icon={CheckCircle}
               label="Completed"
-              numberOfItems={4}
+              numberOfItems={completedCourses.length}
               variant="success"
             />
           </div>
