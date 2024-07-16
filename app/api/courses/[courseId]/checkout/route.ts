@@ -1,7 +1,3 @@
-// import Stripe from "stripe";
-// import { stripe } from "@/lib/stripe";
-
-
 import { NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "@/app/lib/db";

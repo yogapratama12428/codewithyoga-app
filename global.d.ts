@@ -3,5 +3,8 @@ declare global {
       snap: any;
     }
   }
+
+
+
   
   export {};
