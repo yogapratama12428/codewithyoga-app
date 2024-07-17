@@ -44,7 +44,7 @@ export const CourseCard = async ({
             alt={title}
             src={imageUrl}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            // priority={true}
+            priority
             // placeholder="blur"
             // blurDataURL={blurDataURL}
           />
