@@ -6,7 +6,7 @@ import { BookOpen } from "lucide-react";
 import { IconBadge } from "@/components/icon-badge";
 import { formatPrice } from "@/lib/format";
 import { CourseProgress } from "@/components/course-progress";
-import { baseTo64 } from "@/lib/baseTo64";
+// import { baseTo64 } from "@/lib/baseTo64";
 //import { dynamicBlurDataUrl } from "@/lib/dynamicblurdataurl";
 
 interface CourseCardProps {
@@ -31,7 +31,7 @@ export const CourseCard = async ({
   slug,
 }: CourseCardProps) => {
 
-  const blurDataURL = await baseTo64(imageUrl)
+  // const blurDataURL = await baseTo64(imageUrl)
 
   return (
     // <Link href={`/courses/${id}`}>
@@ -44,9 +44,9 @@ export const CourseCard = async ({
             alt={title}
             src={imageUrl}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={true}
-            placeholder="empty"
-            blurDataURL={blurDataURL}
+            // priority={true}
+            // placeholder="blur"
+            // blurDataURL={blurDataURL}
           />
         </div>
       
