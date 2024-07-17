@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
-
 import { IconBadge } from "@/components/icon-badge";
 import { formatPrice } from "@/lib/format";
 import { CourseProgress } from "@/components/course-progress";
+import { dynamicBlurDataUrl } from "@/lib/dynamicblurdataurl";
 
 interface CourseCardProps {
   id: string;
@@ -17,7 +17,7 @@ interface CourseCardProps {
   category: string;
 };
 
-export const CourseCard = ({
+export const CourseCard = async ({
   id,
   title,
   imageUrl,
@@ -27,6 +27,11 @@ export const CourseCard = ({
   category,
   slug,
 }: CourseCardProps) => {
+
+  const blurDataURL = await dynamicBlurDataUrl(imageUrl);
+
+  console.log(blurDataURL)
+
   return (
     // <Link href={`/courses/${id}`}>
      <Link href={`/projects/${slug}`}> 
@@ -39,10 +44,11 @@ export const CourseCard = ({
             src={imageUrl}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={true}
+            placeholder="blur"
+            blurDataURL={blurDataURL}
           />
         </div>
       
-       
         <div className="flex flex-col pt-2">
           <div className="text-lg md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
             {title}
