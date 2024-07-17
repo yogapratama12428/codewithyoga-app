@@ -14,7 +14,7 @@ export const Logo = () => {
                         objectFit: 'contain',
                         position: 'absolute'
                     }}
-                    priority={true}
+                    priority
                 />
             </Link>
           </div>
