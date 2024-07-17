@@ -19,7 +19,7 @@ interface CourseCardProps {
   category: string;
 };
 
-export const CourseCard = async ({
+export const CourseCard = ({
   id,
   title,
   imageUrl,
@@ -30,9 +30,6 @@ export const CourseCard = async ({
   slug,
 }: CourseCardProps) => {
 
-  const blurDataURL = await dynamicBlurDataUrl(imageUrl);
-
-  console.log(blurDataURL)
 
   return (
     // <Link href={`/courses/${id}`}>
@@ -47,7 +44,7 @@ export const CourseCard = async ({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={true}
             placeholder="blur"
-            blurDataURL={blurDataURL}
+            blurDataURL={`data:image/jpeg;base64,${btoa(imageUrl)}`}
           />
         </div>
       
