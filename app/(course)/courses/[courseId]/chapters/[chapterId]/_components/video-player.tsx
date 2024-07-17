@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
@@ -30,8 +30,6 @@ export const VideoPlayer = ({
   const [isReady, setIsReady] = useState(false);
   const router = useRouter();
   const confetti = useConfettiStore();
-
-  console.log(playbackId)
 
   const onEnd = async () => {
     try {
@@ -72,12 +70,15 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && (
-        <ReactPlayer 
-          url={playbackId}
-          controls={true} 
-          width='100%'
-          height='100%'
-        />
+        <Suspense>
+          <ReactPlayer 
+            url={playbackId}
+            controls={true} 
+            width='100%'
+            height='100%'
+          />
+        </Suspense>
+       
 
       )}
     </div>

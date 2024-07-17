@@ -56,12 +56,14 @@ export const NavbarRoutes : React.FC<NavbarRoutesProps> = ({user}) => {
             <UserNav imgUrl={user.picture}/>
           ): (
             <div className="flex">
-              <Button>
-                <LogIn className="h-4 w-4 mr-2" />
-                <LoginLink>
+              <Button asChild>
+                <LoginLink className="flex flex-row">
+                  <LogIn className="h-4 w-4 mr-2" />
                   Login
                 </LoginLink>
               </Button>
+                
+        
             </div>
           )}
         </div>
