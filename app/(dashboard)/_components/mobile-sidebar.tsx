@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react";
+import { icons, Menu } from "lucide-react";
 
 import { 
     Sheet,
@@ -8,6 +8,7 @@ import {
   
 import { Sidebar } from "./Sidebar";
 import { Logo } from "./logo";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -15,9 +16,11 @@ export const MobileSidebar = () => {
   return (
     <div>
       <div className="block md:hidden">
-        <Sheet>
-          <SheetTrigger className="pr-4 hover:opacity-75 transition">
-            <Menu />
+        <Sheet> 
+          <SheetTrigger asChild>
+            <Button size="icon" variant="ghost">
+              <Menu className="h-4 w-4"/>
+            </Button>
           </SheetTrigger>
           <SheetContent side="left" className="p-0 bg-white">
             <Sidebar/>
