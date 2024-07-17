@@ -6,7 +6,8 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
-import ReactPlayer from 'react-player'
+import dynamic from "next/dynamic";
+import ReactPlayer from "react-player";
 
 interface VideoPlayerProps {
   playbackId: any;
@@ -31,6 +32,8 @@ export const VideoPlayer = ({
   const router = useRouter();
   const confetti = useConfettiStore();
 
+  const VideoPlayer = dynamic(() => import('react-player'), { ssr: false })
+
   const onEnd = async () => {
     try {
       if (completeOnEnd) {
@@ -54,6 +57,13 @@ export const VideoPlayer = ({
     }
   }
 
+
+  const loading = (
+    <>
+       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+    </>
+  )
+
   return (
     <div className="relative aspect-video">
       {!isReady && !isLocked && (
@@ -70,8 +80,8 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && (
-        <Suspense>
-          <ReactPlayer 
+        <Suspense fallback={loading}>
+          <VideoPlayer
             url={playbackId}
             controls={true} 
             width='100%'
