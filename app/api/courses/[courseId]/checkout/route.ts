@@ -3,6 +3,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "@/app/lib/db";
 import Midtrans from "midtrans-client";
 import { nanoid } from 'nanoid';
+import { isProduction } from "@/app/lib/midtrans_status";
 
 export async function POST(
   req: Request,
@@ -42,7 +43,7 @@ export async function POST(
     }
 
     let snap = new Midtrans.Snap({
-      isProduction: true,
+      isProduction: isProduction,
       serverKey: process.env.MIDTRANS_SERVER_KEY,
     })
 
