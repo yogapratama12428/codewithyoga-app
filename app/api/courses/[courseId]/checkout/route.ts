@@ -42,7 +42,7 @@ export async function POST(
     }
 
     let snap = new Midtrans.Snap({
-      isProduction: false,
+      isProduction: true,
       serverKey: process.env.MIDTRANS_SERVER_KEY,
     })
 
