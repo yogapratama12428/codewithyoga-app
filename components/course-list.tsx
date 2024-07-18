@@ -34,12 +34,6 @@ export const CoursesList = ({
             category={item?.category?.name!}
           />
         ))}
-
-       <p>
-        {
-          isProduction ? (<>Production</>) : (<>Development</>)
-        }
-       </p>
       </div>
       {items.length === 0 && (
         <div className="text-center text-sm text-muted-foreground mt-10">
