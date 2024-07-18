@@ -6,6 +6,7 @@ import { CourseBuyButton } from "./_component/button-component";
 import { DialogComponent } from "./_component/dialog-component";
 import { Metadata, ResolvingMetadata } from "next";
 import { getProject } from "@/actions/get-project";
+import { PreviewCard } from "./_component/preview-card";
 
 interface CourseCard {
   id: string;
@@ -129,10 +130,15 @@ const ProjectPage =  async ({
             user={user?.id ?? ''}
           />
 
+          {
+            !course.purchase && (
+              <PreviewCard 
+              id={course.id}
+              user={user?.id ?? ''}
+            />
+            )
+          }
         </div>
-
-       
-       
       </div>
     )
   }

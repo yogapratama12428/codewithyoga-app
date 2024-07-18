@@ -34,7 +34,7 @@ export const NavbarRoutes : React.FC<NavbarRoutesProps> = ({user}) => {
           { 
           user && (
             isTeacherPage || isPlayerPage ? (
-              <Link href="/">
+              <Link href="/dashboard">
                 <Button size="sm" variant="ghost">
                   <LogOut className="h-4 w-4 mr-2" />
                   Exit

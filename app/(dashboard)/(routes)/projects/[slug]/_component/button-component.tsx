@@ -116,15 +116,17 @@ export const CourseBuyButton = ({
             )
             
           ) : (
-            <div className='flex flex-col justify-items-center h-full'>
-              <Button className="h-20">
-              
-                <LoginLink>
-                  enroll for {formatPrice(price)}
-                </LoginLink>
+            
+              <Button asChild>
+                  <LoginLink className="flex flex-col justify-items-center h-20 gap-2 w-full">
+                    Enroll for {formatPrice(price)}
+                    <p className="text-xs font-thin text-white">
+                      you will be redirect to register
+                    </p>
+                  </LoginLink>
               </Button>
               
-          </div>
+         
           )
         }
        
