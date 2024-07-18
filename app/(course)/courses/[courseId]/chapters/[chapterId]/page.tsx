@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { File } from "lucide-react";
+import { File, Loader2 } from "lucide-react";
 import { Banner } from "@/components/banner";
 import { Separator } from "@/components/ui/separator";
 import { Preview } from "@/components/preview";
@@ -8,6 +8,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getChapter } from "@/actions/get-chapter";
 import { VideoPlayer } from "./_components/video-player";
 import { CourseProgressButton } from "./_components/course-progress-button";
+import { Suspense } from "react";
+
 
 const ChapterIdPage = async ({
   params
@@ -42,6 +44,13 @@ const ChapterIdPage = async ({
 
   const isLocked = !chapter.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
+
+  
+  const loading = (
+    <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
+          <Loader2 className="h-8 w-8 animate-spin text-secondary" />
+    </div>
+  )
  
   return ( 
     <div>
@@ -59,15 +68,18 @@ const ChapterIdPage = async ({
       )}
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
+        <Suspense fallback={loading}>
           <VideoPlayer
             chapterId={params.chapterId}
             title={chapter.title}
             courseId={params.courseId}
             nextChapterId={nextChapter?.id}
-            playbackId={chapter.videoUrl}
+            playbackId={chapter.videoUrl!}
             isLocked={isLocked}
             completeOnEnd={completeOnEnd}
           />
+        </Suspense>
+          
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">

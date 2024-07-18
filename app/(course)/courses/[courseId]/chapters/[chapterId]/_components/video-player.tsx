@@ -1,16 +1,14 @@
-"use client";
+'use client'
 
 import axios from "axios";
-import { Suspense, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Loader2, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
-import dynamic from "next/dynamic";
-import ReactPlayer from "react-player";
+import { MiniVideo } from "./mini-video";
 
 interface VideoPlayerProps {
-  playbackId: any;
+  playbackId: string;
   courseId: string;
   chapterId: string;
   nextChapterId?: string;
@@ -26,13 +24,10 @@ export const VideoPlayer = ({
   nextChapterId,
   isLocked,
   completeOnEnd,
-  title,
 }: VideoPlayerProps) => {
-  const [isReady, setIsReady] = useState(false);
   const router = useRouter();
   const confetti = useConfettiStore();
 
-  const VideoPlayer = dynamic(() => import('react-player'), { ssr: false })
 
   const onEnd = async () => {
     try {
@@ -57,20 +52,8 @@ export const VideoPlayer = ({
     }
   }
 
-
-  const loading = (
-    <>
-       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-    </>
-  )
-
   return (
     <div className="relative aspect-video">
-      {!isReady && !isLocked && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
-          <Loader2 className="h-8 w-8 animate-spin text-secondary" />
-        </div>
-      )}
       {isLocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800 flex-col gap-y-2 text-secondary">
           <Lock className="h-8 w-8" />
@@ -80,16 +63,7 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && (
-        <Suspense fallback={loading}>
-          <VideoPlayer
-            url={playbackId}
-            controls={true} 
-            width='100%'
-            height='100%'
-          />
-        </Suspense>
-       
-
+        <MiniVideo playbackId={playbackId}/>
       )}
     </div>
   )
