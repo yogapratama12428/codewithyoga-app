@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { snapreference } from "@/app/lib/snap-reference"
+import { useEffect} from "react"
 
 const useSnap = () => {
-    const [ snap, useSnap ] = useState("")
 
     useEffect(()=>{
-        const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js"
+        const snapScript = snapreference
+        
         const clientKey = process.env.MIDTRANS_CLIENT_KEY
     
         const script = document.createElement('script')

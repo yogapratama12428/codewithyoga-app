@@ -70,7 +70,6 @@ export const CourseBuyButton = ({
           onClose: function () {
             /* You may add your own implementation here */
             console.log('you closed the popup without finishing the payment');
-            router.push('/thanks')
         }
         })
       }
