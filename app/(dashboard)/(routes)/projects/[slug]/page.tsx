@@ -130,14 +130,14 @@ const ProjectPage =  async ({
             user={user?.id ?? ''}
           />
 
-          {
+          {/* {
             !course.purchase && (
               <PreviewCard 
               id={course.id}
               user={user?.id ?? ''}
             />
             )
-          }
+          } */}
         </div>
       </div>
     )
