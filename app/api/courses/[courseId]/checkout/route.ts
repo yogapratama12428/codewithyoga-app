@@ -58,7 +58,7 @@ export async function POST(
         id: courseId,
         price: price,
         quantity: 1,
-        name: `CodewithYoga - ${course_title}`,
+        name: `CWY - ${course_title}`,
         category: "Pelajaran"
       }],
       customer_details: {

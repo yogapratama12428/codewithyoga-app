@@ -85,9 +85,8 @@ export const CourseBuyButton = ({
 
   return (
      <div 
-      className="group hover:shadow-sm items-center  overflow-hidden border rounded-lg h-20 bg-slate-800 text-white text-bold"
-      
-     >
+        className="overflow-hidden border rounded-lg h-20 bg-slate-800 text-white text-bold"
+      >
         {
           email ? (
             !purchase ? (

@@ -74,8 +74,6 @@ const ProjectPage =  async ({
       slug: params.slug,
       userId: user?.id,
     });
-     
-    console.log(course)
 
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 ">
@@ -120,15 +118,18 @@ const ProjectPage =  async ({
             user={user?.id ?? ''}
           />
 
-          <CourseBuyButton 
-            price={course.price} 
-            courseId={course.id} 
-            course_title={course.title}
-            given_name={user?.given_name}
-            email={user?.email}
-            purchase={course.purchase?.courseId}
-            user={user?.id ?? ''}
-          />
+          
+          <div className="group hover:shadow-sm items-center w-auto inset-x-0 bottom-0 ">
+            <CourseBuyButton 
+              price={course.price} 
+              courseId={course.id} 
+              course_title={course.slug}
+              given_name={user?.given_name}
+              email={user?.email}
+              purchase={course.purchase?.courseId}
+              user={user?.id ?? ''}
+            />
+          </div>
 
           {/* {
             !course.purchase && (
@@ -139,6 +140,8 @@ const ProjectPage =  async ({
             )
           } */}
         </div>
+      
+       
       </div>
     )
   }

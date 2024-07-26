@@ -8,7 +8,7 @@ import Image from "next/image"
 interface CourseCardProps {
   id: string;
   title: string;
-  chaptersLength: number;
+  chaptersLength: number | 0;
   price: number;
   progress: number | null;
   category: string;

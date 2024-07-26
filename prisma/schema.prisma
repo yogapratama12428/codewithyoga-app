@@ -29,7 +29,7 @@ model Course {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   userId      String
   joingrup    String?
-  slug        String  @unique
+  slug        String  
   title       String  @db.String
   description String? @db.String
   imageUrl    String? @db.String
@@ -49,6 +49,7 @@ model Course {
   updatedAt DateTime @updatedAt
 
   @@index([categoryId])
+  @@unique([slug])
 }
 
 model Category {
